@@ -1,4 +1,4 @@
-#/usr/bin/python
+#!/usr/bin/python
 import sys, os, re, socket, time, select, random, getopt
 from Crypto.Cipher import AES
 
@@ -35,9 +35,9 @@ def applyConfig():
     global IFACE
     IFACE = "wlan0"
     global RHOST
-    RHOST = "192.168.1.173"
+    RHOST = "192.168.2.110"
     global RMAC
-    RMAC = "00:15:61:bd:82:91"
+    RMAC = "00:15:61:cd:44:95"
     global PASSWORD
     PASSWORD = "nopassword"
     global NAME
