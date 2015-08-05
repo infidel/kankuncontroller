@@ -1,0 +1,11 @@
+#!/bin/bash
+retry=0
+while [ $retry -le 3 ] ; do
+    ./kkeps_controller.py -a on | grep -q 'switch is: open'
+    if [ $? == 0 ] ; then
+        break
+    fi
+    sleep 1
+    echo retry: $retry
+    retry=$((retry + 1))
+done
