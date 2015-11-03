@@ -1,4 +1,5 @@
 #!/usr/bin/python
+from __future__ import print_function
 import sys, os, re, socket, time, select, random, getopt
 from Crypto.Cipher import AES
 
@@ -67,13 +68,13 @@ def applyConfig():
 
 def stdout (t, m):
         if (t is "+"):
-                print "\x1b[32;1m[+]\x1b[0m\t" + m + "\n",
+                print("\x1b[32;1m[+]\x1b[0m\t" + m + "\n", end=' ')
         elif (t is "-"):
-                print "\x1b[31;1m[-]\x1b[0m\t" + m + "\n",
+                print("\x1b[31;1m[-]\x1b[0m\t" + m + "\n", end=' ')
         elif (t is "*"):
-                print "\x1b[34;1m[*]\x1b[0m\t" + m + "\n",
+                print("\x1b[34;1m[*]\x1b[0m\t" + m + "\n", end=' ')
         elif (t is "!"):
-                print "\x1b[33;1m[!]\x1b[0m\t" + m + "\n",
+                print("\x1b[33;1m[!]\x1b[0m\t" + m + "\n", end=' ')
 
 
 def createDump (input):
@@ -274,8 +275,8 @@ def sendOp(op, e=None,ont=None,offt=None,y1=None,y2=None,y3=None, tid=None):
                 RPORT = 37092
                 switch = 1
                 m = getPacket(op, e, ont, y1, y2)
-	else:
-		m = getPacket(op)
+        else:
+                m = getPacket(op)
         ret = None
         stdout("*","Sending " + op + " packet...")
         if VERBOSE is not False:
@@ -285,7 +286,7 @@ def sendOp(op, e=None,ont=None,offt=None,y1=None,y2=None,y3=None, tid=None):
                 stdout("+","received reply packet...")
                 if VERBOSE is not False:
                         stdout("*","\n" + createDump(ret))
-                parsed = parseRet(ret)
+                parsed = parseRet(ret.decode('ascii'))
                 if parsed is not None:
                         if op is "set timer" or op is "unset timer":
                                 m = getPacket("confirm timer", parsed)
@@ -300,7 +301,7 @@ def sendOp(op, e=None,ont=None,offt=None,y1=None,y2=None,y3=None, tid=None):
                                 stdout("*","received reply packet...")
                                 if VERBOSE is not False:
                                     stdout("*","\n" + createDump(ret))
-                                parsed = parseRet(ret)
+                                parsed = parseRet(ret.decode('ascii'))
 
 
 def passwordJack():
