@@ -1,7 +1,8 @@
 #!/bin/bash
+scriptdir=`dirname "$BASH_SOURCE"`
 retry=0
 while [ $retry -le 3 ] ; do
-    ./kkeps_controller.py -a off | grep -q 'switch is: close'
+    ${scriptdir}/kkeps_controller.py -a off | grep -q 'switch is: close'
     if [ $? == 0 ] ; then
         break
     fi
